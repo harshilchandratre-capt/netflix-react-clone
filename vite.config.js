@@ -11,4 +11,5 @@ export default defineConfig({
         // additionalData: `@import "./src/styles/variables.scss";`
       }
     }
+  }
 })
