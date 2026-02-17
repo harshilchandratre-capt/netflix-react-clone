@@ -1,13 +1,13 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/ui/Home/index.jsx";
-import Header from "./components/ui/Header/Header";
-import Popular from "./components/ui/Popular/index.jsx";
-import Films from "./components/ui/Films/index.jsx";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import Header from './components/ui/Header/Header'
 import LoadingScreen from "./components/shared/LoadingScreen/LoadingScreen";
-import TVSeries from "./components/ui/TVSeries/index.jsx";
 
+const Films = lazy(() => import('./components/ui/Films/index'));
+const Home = lazy(() => import('./components/ui/Home/index'));
+const Popular = lazy(() => import('./components/ui/Popular/index'));
+const TVSeries = lazy(() => import('./components/ui/TVSeries/index'));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -28,12 +28,14 @@ function App() {
       <div style={{ padding: "0 20px", backgroundColor: "#000" }}>
         <Router>
           <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tvseries" element={<TVSeries />} />
-            <Route path="/films" element={<Films />} />
-            <Route path="/popular" element={<Popular />} />
-          </Routes>
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/tvseries" element={<TVSeries />} />
+              <Route path="/films" element={<Films />} />
+              <Route path="/popular" element={<Popular />} />
+            </Routes>
+          </Suspense>
         </Router>
       </div>
     </>
