@@ -15,17 +15,18 @@ const Popular = () => {
   useEffect(() => {
     const fetchPopularContent = async () => {
       try {
-        const [moviesResponse, tvResponse, trendingResponse] = await Promise.all([
-          axios.get(
-            \https://api.themoviedb.org/3/movie/popular?api_key=\&language=en-US&include_adult=true\
-          ),
-          axios.get(
-            \https://api.themoviedb.org/3/tv/popular?api_key=\&language=en-US&include_adult=true\
-          ),
-          axios.get(
-            \https://api.themoviedb.org/3/trending/all/week?api_key=\&language=en-US\
-          ),
-        ]);
+        const [moviesResponse, tvResponse, trendingResponse] =
+          await Promise.all([
+            axios.get(
+              `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&include_adult=true`
+            ),
+            axios.get(
+              `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=en-US&include_adult=true`
+            ),
+            axios.get(
+              `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}&language=en-US&include_adult=true`
+            ),
+          ]);
 
         setPopularMovies(moviesResponse.data.results);
         setPopularTVSeries(tvResponse.data.results);
