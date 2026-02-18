@@ -19,9 +19,8 @@ const Carousel = ({ movie }) => {
     autoplaySpeed: 5000,
     fade: true,
     waitForAnimate: false,
+    adaptiveHeight: false, 
   };
-
-  
 
   return (
     <div className="carousel-main">
